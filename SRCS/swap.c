@@ -46,10 +46,3 @@ void	swap_one(t_push_swap *ps, t_list *list, char *s)
 	if (ft_memcmp(s, "sa\n", 3) == 0 || ft_memcmp(s, "sb\n", 3) == 0)
 		malloc_opti(ps, s);
 }
-
-void	swap_both(t_push_swap *ps)
-{
-	swap_one(ps, ps->a, "ss\n");
-	swap_one(ps, ps->b, "ss\n");
-	malloc_opti(ps, "ss\n");
-}

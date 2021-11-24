@@ -57,3 +57,22 @@ int	check_if_sort(t_push_swap *ps)
 	ps->a->first = first_tmp;
 	return (0);
 }
+
+void	print_free(t_push_swap *ps, int ac, int check)
+{
+	int	i;
+
+	i = 0;
+	if (ac > 6 && check == 0)
+	{
+		print_ope(ps);
+		while (ps->opti[i] != NULL)
+		{
+			free(ps->opti[i]);
+			i++;
+		}
+		free(ps->opti);
+	}
+	free_list(ps->a);
+	free_list(ps->b);
+}

@@ -16,7 +16,6 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct s_element
 {
@@ -37,8 +36,6 @@ typedef struct s_push_swap
 	int		min_range;
 	int		min;
 	int		med;
-	int		first_med;
-	int		rotate;
 	char	**opti;
 	t_list	*a;
 	t_list	*b;
@@ -50,16 +47,12 @@ int		free_list(t_list *list);
 t_list	*init(int i);
 int		insertion(t_list *list, int new_nbr);
 int		delete(t_list *list);
-int		print_list(t_list *list, t_list *b);
 long	ft_atoi2(const char *str);
 void	rotate_one(t_push_swap *ps, t_list *l, t_element **e, char *s);
-void	rotate_both(t_push_swap *ps);
 void	rev_one(t_push_swap *ps, t_list *l, t_element **e, char *s);
-void	rev_rotate_both(t_push_swap *ps);
 void	push_b(t_push_swap *ps);
 void	push_a(t_push_swap *ps);
 void	swap_one(t_push_swap *ps, t_list *list, char *s);
-void	swap_both(t_push_swap *ps);
 void	sort_three(t_push_swap *ps);
 void	sort_five(t_push_swap *push);
 void	sort_hundred(t_push_swap *ps, char c, int ac);
@@ -88,5 +81,6 @@ void	s_swap_one(t_push_swap *ps, t_list *list, char *s);
 void	print_ope(t_push_swap *ps);
 int		print_push_b(t_push_swap *ps, int i);
 int		print_push_a(t_push_swap *ps, int i);
+void	print_free(t_push_swap *ps, int ac, int check);
 
 #endif

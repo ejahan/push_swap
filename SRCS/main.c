@@ -15,8 +15,6 @@
 void	algo(int ac, t_push_swap *ps)
 {
 	ps->count = 0;
-	if (check_if_sort(ps) == 0)
-		return ;
 	if (ac == 3 && ps->a->first->nbr > ps->a->first->next->nbr)
 		s_swap_one(ps, ps->a, "sa\n");
 	else if (ac == 4)
@@ -55,9 +53,6 @@ int	malloc_opti(t_push_swap *ps, char *str)
 
 int	push_swap(char **av, int ac, t_push_swap *ps)
 {
-	int	i;
-
-	i = 0;
 	ps->ac = ac - 1;
 	if (check_int(av, ac) == -1)
 		return (-1);
@@ -65,19 +60,13 @@ int	push_swap(char **av, int ac, t_push_swap *ps)
 	ps->b = init(0);
 	if (recup_int(av, ac, ps->a) == -1)
 		return (-1);
-	algo(ac, ps);
-	if (ac > 6)
+	if (ac > 2 && check_if_sort(ps) == 0)
 	{
-		print_ope(ps);
-		while (ps->opti[i] != NULL)
-		{
-			free(ps->opti[i]);
-			i++;
-		}
-		free(ps->opti);
+		print_free(ps, ac, 1);
+		return (1);
 	}
-	free_list(ps->a);
-	free_list(ps->b);
+	algo(ac, ps);
+	print_free(ps, ac, 0);
 	return (0);
 }
 
@@ -92,9 +81,7 @@ int	main(int ac, char **av)
 	if (push_swap(av, ac, &ps) == -1)
 	{
 		write(1, "Error\n", 6);
-		system("leaks push_swap");
 		return (1);
 	}
-	system("leaks push_swap");
 	return (0);
 }

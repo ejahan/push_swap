@@ -30,13 +30,6 @@ void	rotate_one(t_push_swap *ps, t_list *list, t_element **elem, char *s)
 		malloc_opti(ps, s);
 }
 
-void	rotate_both(t_push_swap *ps)
-{
-	rotate_one(ps, ps->a, &ps->a->first, "rr\n");
-	rotate_one(ps, ps->b, &ps->b->first, "rr\n");
-	malloc_opti(ps, "rr\n");
-}
-
 void	rev_one(t_push_swap *ps, t_list *list, t_element **elem, char *s)
 {
 	t_element	*tmp;
@@ -56,11 +49,4 @@ void	rev_one(t_push_swap *ps, t_list *list, t_element **elem, char *s)
 	{
 		malloc_opti(ps, s);
 	}
-}
-
-void	rev_rotate_both(t_push_swap *ps)
-{
-	rev_one(ps, ps->a, &ps->a->first, "rrr\n");
-	rev_one(ps, ps->b, &ps->b->first, "rrr\n");
-	malloc_opti(ps, "rrr\n");
 }
