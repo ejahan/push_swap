@@ -28,13 +28,38 @@ int	free_list(t_list *list)
 	return (0);
 }
 
+int	recup_in_str(char *av, t_list *list)
+{
+	int	i;
+
+	i = ft_strlen(av) - 1;
+	printf("i = %d\n", i);
+	while (i != 0)
+	{
+		printf("av = '%s'\n", av);
+		while (av[i] == ' ' && i > 0)
+			i--;
+		printf("av[i] = '%c'\n", av[i]);
+		while (ft_isdigit(av[i]) == 1 && i > 0)
+			i--;
+		if (!(av[i] == ' ' || ft_isdigit(av[i]) == 1))
+		{
+			printf("la\n");
+			printf("%c\n", av[i]);
+			return (-1);
+		}
+		insertion(list, ft_atoi(&av[i]));
+	}
+	return (0);
+}
+
 int	recup_int(char **av, int ac, t_list *list)
 {
 	int	i;
 
 	while (ac > 1)
 	{
-		i = insertion(list, ft_atoi(av[ac - 1]));
+		i = recup_in_str(av[ac - 1], list);
 		if (i == -1)
 		{
 			free_list(list);
@@ -42,6 +67,7 @@ int	recup_int(char **av, int ac, t_list *list)
 		}
 		ac--;
 	}
+	printf("oui\n");
 	return (0);
 }
 
@@ -56,7 +82,7 @@ int	check_int(char **av, int ac)
 		i = 0;
 		if (av[j][i] == '-')
 			i++;
-		while (ft_isdigit(av[j][i]) == 1)
+		while (ft_isdigit(av[j][i]) == 1 || av[j][i] == ' ')
 			i++;
 		if (av[j][i] != '\0')
 			return (-1);
