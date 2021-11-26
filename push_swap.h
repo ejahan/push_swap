@@ -83,5 +83,6 @@ void	print_ope(t_push_swap *ps);
 int		print_push_b(t_push_swap *ps, int i);
 int		print_push_a(t_push_swap *ps, int i);
 void	print_free(t_push_swap *ps, int ac, int check);
+int		print_list(t_list *list, t_list *b);
 
 #endif

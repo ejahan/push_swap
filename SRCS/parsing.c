@@ -28,9 +28,35 @@ int	free_list(t_list *list)
 	return (0);
 }
 
+int	print_list(t_list *list, t_list *b)
+{
+	t_element	*element;
+	t_element	*element2;
+
+	element = list->first;
+	element2 = b->first;
+	if (list == NULL)
+		return (-1);
+	printf("\033[1;34m-> a	\n\033[0m");
+	while (element != NULL)
+	{
+		printf("\033[1;35m%d\n\033[0m", element->nbr);
+		element = element->next;
+	}
+	printf("\033[1;34m\n-> b	\n\033[0m");
+	while (element2 != NULL)
+	{
+		printf("\033[1;35m%d\n\033[0m", element2->nbr);
+		element2 = element2->next;
+	}
+	printf("\n\n\n");
+	return (0);
+}
+
 int	recup_in_str(char *av, t_list *list)
 {
 	int	i;
+	int	check;
 
 	i = ft_strlen(av) - 1;
 	printf("i = %d\n", i);
@@ -48,6 +74,7 @@ int	recup_in_str(char *av, t_list *list)
 			printf("%c\n", av[i]);
 			return (-1);
 		}
+		check = ft_atoi2
 		insertion(list, ft_atoi(&av[i]));
 	}
 	return (0);
@@ -67,7 +94,7 @@ int	recup_int(char **av, int ac, t_list *list)
 		}
 		ac--;
 	}
-	printf("oui\n");
+	print_list(list, list);
 	return (0);
 }
 
