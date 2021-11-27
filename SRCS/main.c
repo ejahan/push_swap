@@ -25,7 +25,7 @@ void	algo(int ac, t_push_swap *ps)
 		ps->opti = malloc(sizeof(char *) * 1500);
 	else if (ac > 101 && ac <= 501)
 		ps->opti = malloc(sizeof(char *) * 10000);
-	if (ac > 6)
+	if (ac > 6 && ac <= 501)
 	{
 		if (ps->opti == NULL)
 			return ;

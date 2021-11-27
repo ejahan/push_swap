@@ -96,6 +96,8 @@ int	check_max(char *str)
 			i++;
 		if (str[i] == '-')
 			i++;
+		// if (str[i] == '\0')
+		// 	return (-1);
 		while (ft_isdigit(str[i]) == 1)
 			i++;
 	}

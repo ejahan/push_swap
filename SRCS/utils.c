@@ -63,7 +63,7 @@ void	print_free(t_push_swap *ps, int ac, int check)
 	int	i;
 
 	i = 0;
-	if (ac > 6 && check == 0)
+	if (ac > 6 && ac <= 501 && check == 0)
 	{
 		print_ope(ps);
 		while (ps->opti[i] != NULL)
