@@ -12,58 +12,19 @@
 
 #include "../push_swap.h"
 
-int	free_list(t_list *list)
-{
-	t_element	*to_delete;
-
-	if (list == NULL)
-		return (-1);
-	while (list->first != NULL)
-	{
-		to_delete = list->first;
-		list->first = list->first->next;
-		free(to_delete);
-	}
-	free(list);
-	return (0);
-}
-
-int	print_list(t_list *list, t_list *b)
-{
-	t_element	*element;
-	t_element	*element2;
-
-	element = list->first;
-	element2 = b->first;
-	if (list == NULL)
-		return (-1);
-	printf("\033[1;34m-> a	\n\033[0m");
-	while (element != NULL)
-	{
-		printf("\033[1;35m%d\n\033[0m", element->nbr);
-		element = element->next;
-	}
-	printf("\033[1;34m\n-> b	\n\033[0m");
-	while (element2 != NULL)
-	{
-		printf("\033[1;35m%d\n\033[0m", element2->nbr);
-		element2 = element2->next;
-	}
-	printf("\n\n\n");
-	return (0);
-}
-
 int	recup_in_str(char *av, t_list *list)
 {
 	int	i;
+	int	ac;
 
 	i = ft_strlen(av) - 1;
-	// if (i == 1)
-	// {
-	// 	insertion(list, ft_atoi(av));
-	// 	return (1);
-	// }
-	while (i != 0)
+	ac = 0;
+	if (i == 0)
+	{
+		insertion(list, ft_atoi(av));
+		return (1);
+	}
+	while (i > 0)
 	{
 		while (av[i] == ' ' && i > 0)
 			i--;
@@ -72,25 +33,26 @@ int	recup_in_str(char *av, t_list *list)
 		if (av[i] == '-')
 			i--;
 		insertion(list, ft_atoi(&av[i]));
+		ac++;
 	}
-	return (0);
+	return (ac);
 }
 
-int	recup_int(char **av, int ac, t_list *list)
+int	recup_int(char **av, int ac, t_push_swap *ps)
 {
 	int	i;
 
 	while (ac > 1)
 	{
-		i = recup_in_str(av[ac - 1], list);
+		i = recup_in_str(av[ac - 1], ps->a);
+		ps->ac += i;
 		if (i == -1)
 		{
-			free_list(list);
+			free_list(ps->a);
 			return (-1);
 		}
 		ac--;
 	}
-	print_list(list, list);
 	return (0);
 }
 
@@ -111,6 +73,8 @@ int	check_digit(char *str)
 			i++;
 		if (str[i] != '\0' && str[i] != '-' && ft_isdigit(str[i]) != 1)
 			return (-1);
+		if (str[i] == '-' && i >= 1 && str[i - 1] != ' ')
+			return (-1);
 	}
 	if (str[i] != '\0')
 		return (-1);
@@ -119,8 +83,8 @@ int	check_digit(char *str)
 
 int	check_max(char *str)
 {
-	int	i;
-	int	check;
+	int		i;
+	long	check;
 
 	i = 0;
 	while (str[i])
@@ -148,10 +112,7 @@ int	check_int(char **av, int ac)
 	{
 		i = 0;
 		if (check_digit(av[j]) == -1)
-		{
-			printf("tamere\n");
 			return (-1);
-		}
 		if (check_max(av[j]) == -1)
 			return (-1);
 		i = j - 1;

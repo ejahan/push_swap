@@ -53,20 +53,20 @@ int	malloc_opti(t_push_swap *ps, char *str)
 
 int	push_swap(char **av, int ac, t_push_swap *ps)
 {
-	ps->ac = ac - 1;
+	ps->ac = 0;
 	if (check_int(av, ac) == -1)
 		return (-1);
 	ps->a = init(0);
 	ps->b = init(0);
-	if (recup_int(av, ac, ps->a) == -1)
+	if (recup_int(av, ac, ps) == -1)
 		return (-1);
-	if (ac > 2 && check_if_sort(ps) == 0)
+	if (ps->ac > 1 && check_if_sort(ps) == 0)
 	{
 		print_free(ps, ac, 1);
 		return (1);
 	}
-	algo(ac, ps);
-	print_free(ps, ac, 0);
+	algo(ps->ac + 1, ps);
+	print_free(ps, ps->ac + 1, 0);
 	return (0);
 }
 

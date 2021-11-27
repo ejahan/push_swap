@@ -53,3 +53,19 @@ int	delete(t_list *list)
 	}
 	return (0);
 }
+
+int	free_list(t_list *list)
+{
+	t_element	*to_delete;
+
+	if (list == NULL)
+		return (-1);
+	while (list->first != NULL)
+	{
+		to_delete = list->first;
+		list->first = list->first->next;
+		free(to_delete);
+	}
+	free(list);
+	return (0);
+}
