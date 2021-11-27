@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elisa <elisa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:24:21 by ejahan            #+#    #+#             */
-/*   Updated: 2021/10/13 18:02:20 by ejahan           ###   ########.fr       */
+/*   Updated: 2021/11/27 11:27:43 by elisa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,21 @@ int	print_list(t_list *list, t_list *b)
 int	recup_in_str(char *av, t_list *list)
 {
 	int	i;
-	int	check;
 
 	i = ft_strlen(av) - 1;
-	printf("i = %d\n", i);
+	// if (i == 1)
+	// {
+	// 	insertion(list, ft_atoi(av));
+	// 	return (1);
+	// }
 	while (i != 0)
 	{
-		printf("av = '%s'\n", av);
 		while (av[i] == ' ' && i > 0)
 			i--;
-		printf("av[i] = '%c'\n", av[i]);
 		while (ft_isdigit(av[i]) == 1 && i > 0)
 			i--;
-		if (!(av[i] == ' ' || ft_isdigit(av[i]) == 1))
-		{
-			printf("la\n");
-			printf("%c\n", av[i]);
-			return (-1);
-		}
-		check = ft_atoi2
+		if (av[i] == '-')
+			i--;
 		insertion(list, ft_atoi(&av[i]));
 	}
 	return (0);
@@ -98,6 +94,50 @@ int	recup_int(char **av, int ac, t_list *list)
 	return (0);
 }
 
+int	check_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ')
+			i++;
+		if (str[i] == '-')
+			i++;
+		while (ft_isdigit(str[i]) == 1)
+			i++;
+		while (str[i] == ' ')
+			i++;
+		if (str[i] != '\0' && str[i] != '-' && ft_isdigit(str[i]) != 1)
+			return (-1);
+	}
+	if (str[i] != '\0')
+		return (-1);
+	return (1);
+}
+
+int	check_max(char *str)
+{
+	int	i;
+	int	check;
+
+	i = 0;
+	while (str[i])
+	{
+		check = ft_atoi2(&str[i]);
+		if (check > 2147483647 || check < -2147483648)
+			return (-1);
+		while (str[i] == ' ')
+			i++;
+		if (str[i] == '-')
+			i++;
+		while (ft_isdigit(str[i]) == 1)
+			i++;
+	}
+	return (1);
+}
+
 int	check_int(char **av, int ac)
 {
 	int	i;
@@ -107,13 +147,12 @@ int	check_int(char **av, int ac)
 	while (j > 0)
 	{
 		i = 0;
-		if (av[j][i] == '-')
-			i++;
-		while (ft_isdigit(av[j][i]) == 1 || av[j][i] == ' ')
-			i++;
-		if (av[j][i] != '\0')
+		if (check_digit(av[j]) == -1)
+		{
+			printf("tamere\n");
 			return (-1);
-		if (ft_atoi2(av[j]) > 2147483647 || ft_atoi2(av[j]) < -2147483648)
+		}
+		if (check_max(av[j]) == -1)
 			return (-1);
 		i = j - 1;
 		while (i > 0)
