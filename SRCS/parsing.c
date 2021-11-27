@@ -12,31 +12,6 @@
 
 #include "../push_swap.h"
 
-int	print_list(t_list *list, t_list *b)
-{
-	t_element	*element;
-	t_element	*element2;
-
-	element = list->first;
-	element2 = b->first;
-	if (list == NULL)
-		return (-1);
-	printf("\033[1;34m-> a	\n\033[0m");
-	while (element != NULL)
-	{
-		printf("\033[1;35m%d\n\033[0m", element->nbr);
-		element = element->next;
-	}
-	printf("\033[1;34m\n-> b	\n\033[0m");
-	while (element2 != NULL)
-	{
-		printf("\033[1;35m%d\n\033[0m", element2->nbr);
-		element2 = element2->next;
-	}
-	printf("\n\n\n");
-	return (0);
-}
-
 int	recup_in_str(char *av, t_list *list)
 {
 	int	i;
